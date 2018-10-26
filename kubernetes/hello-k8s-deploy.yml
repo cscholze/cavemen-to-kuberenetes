@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello-k8s-deploy
+  name: hello-k8s-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-k8s-pod
+  template:
+    metadata:
+      labels:
+        app: hello-k8s-pod
+    spec:
+      containers:
+      - name: hello-k8s-container
+        image: paulbouwer/hello-kubernetes:1.5
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MESSAGE
+          value: I just deployed this on Kubernetes!
